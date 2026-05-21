@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Date Proposal</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Pretendard",sans-serif;
+      background:#f5f5f7;
+      color:#1d1d1f;
+      overflow-x:hidden;
+    }
+
+    .container{
+      width:100%;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:40px 20px;
+    }
+
+    .card{
+      width:100%;
+      max-width:820px;
+      background:white;
+      border-radius:32px;
+      padding:80px 40px;
+      text-align:center;
+      box-shadow:0 10px 40px rgba(0,0,0,0.08);
+    }
+
+    .small-text{
+      font-size:14px;
+      color:#86868b;
+      margin-bottom:20px;
+      letter-spacing:-0.2px;
+    }
+
+    h1{
+      font-size:54px;
+      font-weight:600;
+      letter-spacing:-2px;
+      line-height:1.1;
+      margin-bottom:24px;
+    }
+
+    .subtitle{
+      font-size:21px;
+      line-height:1.7;
+      color:#424245;
+      margin-bottom:60px;
+    }
+
+    .button-group{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-bottom:40px;
+    }
+
+    .btn{
+      padding:14px 30px;
+      border-radius:999px;
+      border:none;
+      cursor:pointer;
+      font-size:17px;
+      transition:0.25s;
+    }
+
+    .btn:hover{
+      transform:scale(0.96);
+    }
+
+    .btn-primary{
+      background:#0066cc;
+      color:white;
+    }
+
+    .btn-secondary{
+      background:transparent;
+      border:1px solid #0066cc;
+      color:#0066cc;
+    }
+
+    .courses{
+      display:none;
+      margin-top:40px;
+      text-align:left;
+    }
+
+    .course{
+      background:#fbfbfd;
+      border-radius:28px;
+      padding:36px;
+      border:1px solid #e5e5e7;
+      margin-bottom:32px;
+    }
+
+    .course h2{
+      font-size:30px;
+      margin-bottom:28px;
+      letter-spacing:-1px;
+    }
+
+    .timeline{
+      display:flex;
+      flex-direction:column;
+      gap:22px;
+    }
+
+    .step{
+      padding-bottom:18px;
+      border-bottom:1px solid #ececec;
+    }
+
+    .step:last-child{
+      border-bottom:none;
+    }
+
+    .place{
+      font-size:20px;
+      font-weight:600;
+      margin-bottom:8px;
+    }
+
+    .desc{
+      font-size:17px;
+      line-height:1.7;
+      color:#555;
+    }
+
+    .select-wrap{
+      margin-top:32px;
+      text-align:center;
+    }
+
+    .select-btn{
+      background:#0066cc;
+      color:white;
+      border:none;
+      border-radius:999px;
+      padding:14px 28px;
+      font-size:16px;
+      cursor:pointer;
+      transition:0.25s;
+    }
+
+    .select-btn:hover{
+      transform:scale(0.96);
+    }
+
+    .footer-message{
+      margin-top:60px;
+      font-size:20px;
+      line-height:1.8;
+      color:#444;
+      text-align:center;
+    }
+
+    .quiz-box{
+      margin-top:20px;
+      padding:32px;
+      background:#fbfbfd;
+      border-radius:24px;
+      border:1px solid #e5e5e7;
+    }
+
+    .quiz-title{
+      font-size:20px;
+      font-weight:600;
+      margin-bottom:20px;
+    }
+
+    .quiz-question{
+      font-size:16px;
+      line-height:1.8;
+      color:#555;
+      margin-bottom:24px;
+    }
+
+    .quiz-input{
+      width:100%;
+      padding:16px;
+      border-radius:16px;
+      border:1px solid #d2d2d7;
+      font-size:16px;
+      margin-bottom:16px;
+      outline:none;
+    }
+
+    .quiz-input:focus{
+      border-color:#0066cc;
+    }
+
+    .quiz-btn{
+      background:#0066cc;
+      color:white;
+      border:none;
+      border-radius:999px;
+      padding:14px 24px;
+      font-size:16px;
+      cursor:pointer;
+      transition:0.25s;
+    }
+
+    .quiz-btn:hover{
+      transform:scale(0.96);
+    }
+
+    .quiz-result{
+      margin-top:20px;
+      font-size:17px;
+      line-height:1.7;
+      color:#444;
+    }
+
+    @media (max-width:768px){
+
+      .card{
+        padding:60px 24px;
+      }
+
+      h1{
+        font-size:38px;
+      }
+
+      .subtitle{
+        font-size:18px;
+      }
+
+      .course h2{
+        font-size:24px;
+      }
+
+      .place{
+        font-size:18px;
+      }
+
+      .desc{
+        font-size:16px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="card">
+
+    <p class="small-text">
+      2026 Spring Date Proposal
+    </p>
+
+    <h1>
+      5/23 토요일<br>
+      데이트 일정 제안함
+    </h1>
+
+    <p class="subtitle">
+      이동 동선, 체력 소모, 분위기 등을 고려하여<br>
+      비교적 안정적인 코스로 구성함.<br>
+      검토 후 참석 바람.
+    </p>
+
+    <div class="button-group">
+
+      <button class="btn btn-primary" onclick="showCourses()">
+        Yes
+      </button>
+
+      <button class="btn btn-secondary" onclick="showCourses()">
+        Yes
+      </button>
+
+    </div>
+
+    <div class="courses" id="courses">
+
+      <!-- COURSE 1 -->
+
+      <div class="course">
+
+        <h2>
+          Course 1 · 여의도 코스
+        </h2>
+
+        <div class="timeline">
+
+          <div class="step">
+            <div class="place">
+              더현대 서울 도착
+            </div>
+
+            <div class="desc">
+              실내 이동 위주라 날씨 영향 적음.<br>
+              구경 요소 많아서 시간 보내기 괜찮음.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="place">
+              점심 식사
+            </div>
+
+            <div class="desc">
+              대기 시간 고려하여 식사 장소 선정함.<br>
+              실패 확률 낮은 메뉴 위주로 검토함.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="place">
+              쇼핑
+            </div>
+
+            <div class="desc">
+              쇼핑 동선 짧은 편이라 체력 부담 크지 않음.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="place">
+              한강 나들이
+            </div>
+
+            <div class="desc">
+              저녁 시간대 기준으로 풍경 괜찮은 편임.<br>
+              산책하기 적당함.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="place">
+              한강 버스로 잠실 이동
+            </div>
+
+            <div class="desc">
+              일반 이동보다 분위기 괜찮은 편임.<br>
+              야경 보기 적합함.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="place">
+              롯데시네마에서 군체 관람
+            </div>
+
+            <div class="desc">
+              일정 마무리용으로 영화 배치함.<br>
+              이동 동선도 무난한 편임.
+            </div>
+          </div>
+
+        </div>
+
+        <div class="select-wrap">
+          <button class="select-btn" onclick="selectCourse(1)">
+            Course 1 선택
+          </button>
+        </div>
+
+      </div>
+
+      <!-- COURSE 2 -->
+
+      <div class="course">
+
+        <h2>
+          Course 2 · 한남동 코스
+        </h2>
+
+        <div class="timeline">
+
+          <div class="step">
+            <div class="place">
+              한남동 도착
+            </div>
+
+            <div class="desc">
+              카페 및 편집샵 밀집되어 있음.<br>
+              천천히 돌아다니기 괜찮은 동네임.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="place">
+              점심 식사
+            </div>
+
+            <div class="desc">
+              분위기보다 음식 기준으로 우선 선정함.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="place">
+              쇼핑
+            </div>
+
+            <div class="desc">
+              도보 이동 범위 내에 볼 곳 많은 편임.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="place">
+              옥수역 이동
+            </div>
+
+            <div class="desc">
+              대중교통 기준 약 15분 소요 예상함.<br>
+              이동 부담 크지 않음.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="place">
+              한강 버스로 잠실 이동
+            </div>
+
+            <div class="desc">
+              잠실 방향 이동 겸 야경 보기 괜찮음.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="place">
+              롯데시네마에서 군체 관람
+            </div>
+
+            <div class="desc">
+              일정 마무리하기 적당한 구성이라고 판단함.
+            </div>
+          </div>
+
+        </div>
+
+        <div class="select-wrap">
+          <button class="select-btn" onclick="selectCourse(2)">
+            Course 2 선택
+          </button>
+        </div>
+
+      </div>
+
+      <!-- COURSE 3 -->
+
+      <div class="course">
+
+        <h2>
+          Course 3 · 성수 코스
+        </h2>
+
+        <div class="timeline">
+
+          <div class="step">
+            <div class="place">
+              성수역 도착
+            </div>
+
+            <div class="desc">
+              편집샵 및 팝업스토어 밀집되어 있음.<br>
+              도보 이동만으로도 구경 요소 많은 편임.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="place">
+              점심 식사
+            </div>
+
+            <div class="desc">
+              웨이팅 고려하여 비교적 안정적인 장소 위주로 검토함.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="place">
+              쇼핑 및 거리 구경
+            </div>
+
+            <div class="desc">
+              성수 특유의 분위기 체감 가능함.<br>
+              천천히 돌아다니기 적당함.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="place">
+              서울숲 이동
+            </div>
+
+            <div class="desc">
+              성수에서 도보 이동 가능함.<br>
+              중간 휴식 장소로 적합함.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="place">
+              자전거 대여 및 한강 라이딩
+            </div>
+
+            <div class="desc">
+              날씨 좋을 경우 체감 만족도 높을 것으로 예상함.<br>
+              과하게 힘들지 않은 코스로 구성 가능함.
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="place">
+              카페 또는 저녁 식사
+            </div>
+
+            <div class="desc">
+              일정 마무리용으로 무난한 구성이라고 판단함.
+            </div>
+          </div>
+
+        </div>
+
+        <div class="select-wrap">
+          <button class="select-btn" onclick="selectCourse(3)">
+            Course 3 선택
+          </button>
+        </div>
+
+      </div>
+
+      <div class="footer-message" id="finalMessage" style="display:none;">
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+  function showCourses(){
+
+    document.getElementById('courses').style.display='block';
+
+    window.scrollTo({
+      top:document.body.scrollHeight,
+      behavior:'smooth'
+    });
+
+  }
+
+  function selectCourse(courseNumber){
+
+    const finalMessage=document.getElementById('finalMessage');
+
+    finalMessage.style.display='block';
+
+    finalMessage.innerHTML=`
+
+      Course ${courseNumber} 선택 완료.<br><br>
+
+      데이트 초안이 전달되었습니다.<br><br>
+
+      상세 데이트 내용은<br>
+      담당자(박지훈)에게 문의 바람.<br><br><br>
+
+      <div class="quiz-box">
+
+        <div class="quiz-title">
+          담당자 연락처 확인용 간단 문제
+        </div>
+
+        <div class="quiz-question">
+
+          Q.<br>
+          담당자 연락처 뒷자리 계산 후 입력 바람.<br><br>
+
+          3 × 1100 + (5² - 24)<br><br>
+
+          계산 결과 4자리 입력.
+
+        </div>
+
+        <input
+          type="text"
+          id="quizAnswer"
+          class="quiz-input"
+          placeholder="정답 입력"
+        >
+
+        <button class="quiz-btn" onclick="checkAnswer()">
+          정답 확인
+        </button>
+
+        <div id="quizResult" class="quiz-result"></div>
+
+      </div>
+
+    `;
+
+    window.scrollTo({
+      top:document.body.scrollHeight,
+      behavior:'smooth'
+    });
+
+  }
+
+  function checkAnswer(){
+
+    const answer=document.getElementById('quizAnswer').value.trim();
+    const result=document.getElementById('quizResult');
+
+    if(answer==="3301"){
+
+      result.innerHTML=`
+
+        확인 완료.<br><br>
+
+        담당자 연락처는 아래와 같음.<br><br>
+
+        010-7479-3301
+
+      `;
+
+    }else{
+
+      result.innerHTML=`
+
+        불일치.<br>
+        계산 과정 재검토 바람.
+
+      `;
+
+    }
+
+  }
+
+</script>
+
+</body>
+</html>
